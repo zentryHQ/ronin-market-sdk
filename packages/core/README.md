@@ -205,6 +205,40 @@ const params = {
 const data = await getErc1155TokenWithOrders(params);
 ```
 
+#### _Get erc1155 tokens list_
+
+```javascript
+import {
+  ChainId,
+  getErc1155TokensList,
+  AuctionType,
+  SortBy,
+} from "@zentry/mavis-market-core";
+
+const params = {
+  chainId: ChainId.testnet,
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  from: 0,
+  size: 10,
+  owner: "0xce21e5ed74935379eda4d9120c3887423f960aac", // Optional
+  auctionType: AuctionType.NotForSale, // Optional
+  criteria: [{ name: "attribute_1", values: ["value_1", "value_2"] }], // Optional
+  sort: SortBy.PriceAsc, // Optional
+  name: "Cyberkongz", // Optional
+  rangeCriteria: [
+    {
+      name: "attribute_1",
+      range: {
+        from: "1000000000000000000",
+        to: "1000000000000000000",
+      },
+    },
+  ], // Optional
+};
+
+const { total, results } = await getErc1155TokensList(params);
+```
+
 #### _Get erc1155 token transfer history_
 
 ```javascript

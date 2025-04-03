@@ -167,3 +167,23 @@ export const FeaturedGameEventFragment = gql`
     }
   }
 `;
+export const Erc1155TokenBriefFragment = gql`
+  fragment Erc1155TokenBrief on Erc1155 {
+    tokenAddress
+    tokenId
+    slug
+    name
+    image
+    cdnImage
+    video
+    minPrice
+    totalItems
+    collectionMetadata
+    isLocked
+    badged
+    orders(from: 0, size: 1, showInvalid: false, sort: PriceAsc) {
+      ...OrderInfo
+    }
+  }
+`;
+

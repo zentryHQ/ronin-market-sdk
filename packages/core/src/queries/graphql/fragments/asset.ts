@@ -7,6 +7,5 @@ export const AssetFragment = gql`
     id
     quantity
     orderId
-    __typename
   }
 `;

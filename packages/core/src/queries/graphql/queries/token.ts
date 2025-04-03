@@ -4,6 +4,7 @@ import { AssetFragment } from "../fragments/asset";
 import { OrderFragment, OrderInfoFragment } from "../fragments/order";
 import { PublicProfileBriefFragment } from "../fragments/profile";
 import {
+  Erc1155TokenBriefFragment,
   Erc1155TokenFragment,
   Erc721TokenFragment,
   TransferRecordFragment,
@@ -357,4 +358,44 @@ export const GET_ERC1155_TOKEN_WITH_ORDERS = gql`
       }
     }
   }
+`;
+
+export const GET_ERC1155_TOKENS_LIST = gql`
+  query GetERC1155TokensList(
+    $tokenAddress: String
+    $slug: String
+    $criteria: [SearchCriteria!]
+    $from: Int!
+    $size: Int!
+    $sort: SortBy
+    $auctionType: AuctionType
+    $name: String
+    $rangeCriteria: [RangeSearchCriteria!]
+    $owner: String
+  ) {
+    erc1155Tokens(
+      tokenAddress: $tokenAddress
+      slug: $slug
+      criteria: $criteria
+      from: $from
+      size: $size
+      sort: $sort
+      auctionType: $auctionType
+      name: $name
+      rangeCriteria: $rangeCriteria
+      owner: $owner
+    ) {
+      total
+      results {
+        ...Erc1155TokenBrief
+        __typename
+      }
+      __typename
+    }
+  }
+
+  ${Erc1155TokenBriefFragment}
+  ${OrderInfoFragment}
+  ${AssetFragment}
+  ${PublicProfileBriefFragment}
 `;

@@ -46,7 +46,6 @@ export const OrderInfoFragment = gql`
     kind
     assets {
       ...AssetInfo
-      __typename
     }
     expiredAt
     paymentToken
@@ -63,7 +62,6 @@ export const OrderInfoFragment = gql`
     suggestedPrice
     makerProfile {
       ...PublicProfileBrief
-      __typename
     }
     orderStatus
     orderQuantity {
@@ -71,8 +69,6 @@ export const OrderInfoFragment = gql`
       quantity
       remainingQuantity
       availableQuantity
-      __typename
     }
-    __typename
   }
 `;

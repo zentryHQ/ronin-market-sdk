@@ -28,11 +28,6 @@ export const PublicProfileBriefFragment = gql`
     }
     activated
     name
-    __typename
   }
-  fragment Addresses on NetAddresses {
-    ethereum
-    ronin
-    __typename
-  }
+  ${AddressesFragment}
 `;

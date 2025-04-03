@@ -337,6 +337,23 @@ export interface GetErc1155TokenWithOrdersResponse {
   erc1155Token: Erc1155Token;
 }
 
+export interface GetErc1155TokensListParams {
+  chainId: number;
+  tokenAddress?: string;
+  slug?: string;
+  criteria?: SearchCriteria[];
+  from: number;
+  size: number;
+  sort?: SortBy;
+  auctionType?: AuctionType;
+  name?: string;
+  rangeCriteria?: RangeSearchCriteria[];
+  owner?: string;
+}
 
-
-
+export interface GetErc1155TokensListResponse {
+  erc1155Tokens: {
+    total: number;
+    results: Erc1155Token[];
+  };
+}
