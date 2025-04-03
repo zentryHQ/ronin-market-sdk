@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 
-import { AssetFragment } from '../fragments/asset';
+import { AssetFragment, AssetInfoFragment } from '../fragments/asset';
 import { OrderFragment, OrderInfoFragment } from '../fragments/order';
 import { PublicProfileBriefFragment } from '../fragments/profile';
 import {
@@ -357,6 +357,6 @@ export const GET_ERC1155_TOKENS_LIST = gql`
 
   ${Erc1155TokenBriefFragment}
   ${OrderInfoFragment}
-  ${AssetFragment}
+  ${AssetInfoFragment}
   ${PublicProfileBriefFragment}
 `;

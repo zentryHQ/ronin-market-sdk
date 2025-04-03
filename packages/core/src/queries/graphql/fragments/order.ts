@@ -9,7 +9,7 @@ export const OrderFragment = gql`
     maker
     kind
     assets {
-      ...AssetInfo
+      ...Asset
     }
     expiredAt
     paymentToken
