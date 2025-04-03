@@ -10,6 +10,7 @@ import {
   GET_ERC1155_TOKEN,
   GET_ERC1155_TOKENS,
   GET_ERC1155_TRANSFER_HISTORY,
+  GET_MY_ERC1155_TOKENS_LIST,
 } from '../graphql/queries/token';
 import { AuctionType, ListingSortBy } from '../order/types';
 import {
@@ -33,6 +34,8 @@ import {
   GetErc1155TokenTransferHistoryResponse,
   RefreshMetadataParams,
   RefreshMetadataResponse,
+  GetMyErc1155TokensListParams,
+  GetMyErc1155TokensListResponse,
 } from './queryTypes';
 import { CommonTokenData } from './types';
 
@@ -206,3 +209,22 @@ export const refreshMetadata = (params: RefreshMetadataParams) => {
     chainId,
   });
 };
+
+export const getMyErc1155TokensList = (params: GetMyErc1155TokensListParams) => {
+  const { chainId, ...otherParams } = params;
+
+  return graphQLRequest<GetMyErc1155TokensListResponse>({
+    query: GET_MY_ERC1155_TOKENS_LIST,
+    variables: { ...otherParams },
+    chainId,
+  }).then(response => {
+    const erc1155Tokens = response?.erc1155Tokens || {};
+    const { total, results } = erc1155Tokens;
+    return {
+      total: total || 0,
+      results: results || [],
+    };
+  });
+};
+
+

@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
 export const AddressesFragment = gql`
   fragment Addresses on NetAddresses {
@@ -17,4 +17,22 @@ export const PublicProfileFragment = gql`
     name
   }
   ${AddressesFragment}
+`;
+
+export const PublicProfileBriefFragment = gql`
+  fragment PublicProfileBrief on PublicProfile {
+    accountId
+    addresses {
+      ...Addresses
+      __typename
+    }
+    activated
+    name
+    __typename
+  }
+  fragment Addresses on NetAddresses {
+    ethereum
+    ronin
+    __typename
+  }
 `;

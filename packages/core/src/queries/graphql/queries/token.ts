@@ -1,7 +1,13 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
-import { OrderFragment } from '../fragments/order';
-import { Erc721TokenFragment, Erc1155TokenFragment, TransferRecordFragment } from '../fragments/token';
+import { AssetFragment } from "../fragments/asset";
+import { OrderFragment, OrderInfoFragment } from "../fragments/order";
+import { PublicProfileBriefFragment } from "../fragments/profile";
+import {
+  Erc1155TokenFragment,
+  Erc721TokenFragment,
+  TransferRecordFragment,
+} from "../fragments/token";
 
 // Erc721
 export const GET_ERC721_TOKENS = gql`
@@ -41,7 +47,11 @@ export const GET_ERC721_TOKENS = gql`
 `;
 
 export const GET_ERC721_TOKEN = gql`
-  query GetERC721Token($tokenAddress: String!, $tokenId: String!, $showMinPrice: Boolean!) {
+  query GetERC721Token(
+    $tokenAddress: String!
+    $tokenId: String!
+    $showMinPrice: Boolean!
+  ) {
     erc721Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       ...Erc721Token
       minPrice @include(if: $showMinPrice)
@@ -51,7 +61,12 @@ export const GET_ERC721_TOKEN = gql`
 `;
 
 export const GET_ERC721_TRANSFER_HISTORY = gql`
-  query GetERC721TransferHistory($tokenAddress: String!, $tokenId: String!, $from: Int!, $size: Int!) {
+  query GetERC721TransferHistory(
+    $tokenAddress: String!
+    $tokenId: String!
+    $from: Int!
+    $size: Int!
+  ) {
     erc721Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       transferHistory(from: $from, size: $size) {
         total
@@ -100,7 +115,11 @@ export const GET_ERC1155_TOKENS = gql`
 `;
 
 export const GET_ERC1155_TOKEN = gql`
-  query GetERC1155Token($tokenAddress: String!, $tokenId: BigDecimal!, $showMinPrice: Boolean!) {
+  query GetERC1155Token(
+    $tokenAddress: String!
+    $tokenId: BigDecimal!
+    $showMinPrice: Boolean!
+  ) {
     erc1155Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       ...Erc1155Token
       minPrice @include(if: $showMinPrice)
@@ -110,7 +129,12 @@ export const GET_ERC1155_TOKEN = gql`
 `;
 
 export const GET_ERC1155_TRANSFER_HISTORY = gql`
-  query GetERC1155TransferHistory($tokenAddress: String!, $tokenId: BigDecimal!, $from: Int!, $size: Int!) {
+  query GetERC1155TransferHistory(
+    $tokenAddress: String!
+    $tokenId: BigDecimal!
+    $from: Int!
+    $size: Int!
+  ) {
     erc1155Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       transferHistory(from: $from, size: $size) {
         total
@@ -124,7 +148,11 @@ export const GET_ERC1155_TRANSFER_HISTORY = gql`
 `;
 
 export const GET_ERC1155_BALANCE = gql`
-  query GetErc1155Balance($tokenAddress: String!, $tokenId: BigDecimal!, $owner: String!) {
+  query GetErc1155Balance(
+    $tokenAddress: String!
+    $tokenId: BigDecimal!
+    $owner: String!
+  ) {
     erc1155Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       balance(owner: $owner)
     }
@@ -133,8 +161,21 @@ export const GET_ERC1155_BALANCE = gql`
 
 // Get all tokens
 export const GET_ALL_TOKENS = gql`
-  query GetAllTokens($owner: String!, $auctionType: OrderAuctionType, $from: Int!, $size: Int!, $sort: ListingSortBy!) {
-    tokens(owner: $owner, auctionType: $auctionType, from: $from, size: $size, sort: $sort, tokenAddresses: []) {
+  query GetAllTokens(
+    $owner: String!
+    $auctionType: OrderAuctionType
+    $from: Int!
+    $size: Int!
+    $sort: ListingSortBy!
+  ) {
+    tokens(
+      owner: $owner
+      auctionType: $auctionType
+      from: $from
+      size: $size
+      sort: $sort
+      tokenAddresses: []
+    ) {
       total
       data {
         ... on Erc721 {
@@ -158,7 +199,13 @@ export const GET_ALL_TOKENS = gql`
           erc1155CdnImage: cdnImage
           erc1155Video: video
           erc1155CollectionMetadata: collectionMetadata
-          erc1155Orders: orders(maker: $owner, from: 0, size: 1, showInvalid: true, sort: PriceAsc) {
+          erc1155Orders: orders(
+            maker: $owner
+            from: 0
+            size: 1
+            showInvalid: true
+            sort: PriceAsc
+          ) {
             ...Order
           }
           erc1155Balance: balance(owner: $owner)
@@ -167,4 +214,67 @@ export const GET_ALL_TOKENS = gql`
     }
   }
   ${OrderFragment}
+`;
+
+export const GET_MY_ERC1155_TOKENS_LIST = gql`
+  query GetMyERC1155TokensList(
+    $tokenAddress: String
+    $slug: String
+    $owner: String!
+    $criteria: [SearchCriteria!]
+    $from: Int!
+    $size: Int!
+    $sort: SortBy
+    $auctionType: AuctionType
+    $name: String
+  ) {
+    erc1155Tokens(
+      tokenAddress: $tokenAddress
+      slug: $slug
+      criteria: $criteria
+      from: $from
+      size: $size
+      sort: $sort
+      owner: $owner
+      auctionType: $auctionType
+      name: $name
+    ) {
+      total
+      results {
+        tokenAddress
+        tokenId
+        name
+        image
+        cdnImage
+        video
+        balance(owner: $owner)
+        orders(
+          maker: $owner
+          from: 0
+          size: 1
+          showInvalid: true
+          sort: PriceAsc
+        ) {
+          ...OrderInfo
+          __typename
+        }
+        otherOrders: orders(
+          from: 0
+          size: 1
+          showInvalid: true
+          sort: PriceAsc
+        ) {
+          ...OrderInfo
+          __typename
+        }
+        isLocked
+        collectionMetadata
+        __typename
+      }
+      __typename
+    }
+  }
+  ${OrderInfoFragment}
+  ${AssetFragment}
+  ${PublicProfileBriefFragment}
 `;

@@ -5,10 +5,11 @@ export const getNonce = async (chainId: ChainId, address: string) => {
   const marketGatewayContract = createMarketGatewayContract(chainId);
   const readProvider = createReadOnlyProvider(chainId);
 
-  if (chainId === ChainId.testnet) {
-    const nonce = await marketGatewayContract.connect(readProvider).makerNonce(address);
-    return Number(nonce);
-  }
+  // if (chainId === ChainId.testnet) {
+  //   const contract = marketGatewayContract.connect(readProvider);
+  //   const nonce = await contract.makerNonce(address);
+  //   return Number(nonce);
+  // }
 
   const params = MavisExchange__factory.createInterface().encodeFunctionData('makerNonce', [address]);
 

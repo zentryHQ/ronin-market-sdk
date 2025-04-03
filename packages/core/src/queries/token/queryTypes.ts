@@ -1,6 +1,12 @@
-import { ChainId } from '../../types';
-import { CollectionMetadata, Erc } from '../collection';
-import { AuctionType, ListingSortBy, Order } from '../order/types';
+import { ChainId } from "../../types";
+import { CollectionMetadata, Erc } from "../collection";
+import {
+  AuctionType,
+  ListingSortBy,
+  Order,
+  OrderQuantity,
+} from "../order/types";
+import { Addresses } from "../profile/types";
 import {
   CommonTokenData,
   Erc721Token,
@@ -10,7 +16,7 @@ import {
   SearchCriteria,
   SortBy,
   TransferHistory,
-} from './types';
+} from "./types";
 
 // Get tokens
 export interface GetErc721TokensParams {
@@ -205,4 +211,74 @@ export interface GetAllTokensResult {
     ercType: Erc;
     data: CommonTokenData;
   }[];
+}
+
+export interface GetMyErc1155TokensListParams {
+  chainId: number;
+  tokenAddress?: string;
+  slug?: string;
+  owner: string;
+  criteria?: SearchCriteria[];
+  from: number;
+  size: number;
+  sort?: SortBy;
+  auctionType?: AuctionType;
+  name?: string;
+}
+
+export interface PublicProfileBrief {
+  accountId: string;
+  addresses: Addresses;
+  activated: boolean;
+  name: string;
+}
+
+export interface AssetInfo {
+  erc: string;
+  address: string;
+  id: string;
+  quantity: number;
+  orderId: string;
+}
+
+export interface OrderInfo {
+  id: string;
+  maker: string;
+  kind: string;
+  assets: AssetInfo[];
+  expiredAt: string;
+  paymentToken: string;
+  startedAt: string;
+  basePrice: string;
+  expectedState: string;
+  nonce: string;
+  marketFeePercentage: number;
+  signature: string;
+  hash: string;
+  duration: string;
+  timeLeft: string;
+  currentPrice: string;
+  suggestedPrice: string;
+  makerProfile: PublicProfileBrief;
+  orderStatus: string;
+  orderQuantity: OrderQuantity;
+}
+
+export interface GetMyErc1155TokensListResponse {
+  erc1155Tokens: {
+    total: number;
+    results: Array<{
+      tokenAddress: string;
+      tokenId: string;
+      name: string;
+      image: string;
+      cdnImage: string;
+      video: string;
+      balance: number;
+      orders: OrderInfo[];
+      otherOrders: OrderInfo[];
+      isLocked: boolean;
+      collectionMetadata: CollectionMetadata;
+    }>;
+  };
 }

@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 
-import { OrderFragment } from './order';
+import { OrderFragment, OrderInfoFragment } from './order';
 import { PublicProfileFragment } from './profile';
 
 export const TokenTraitFragment = gql`
