@@ -19,6 +19,8 @@ import {
   GetErc1155TokenTransferHistoryParams,
   getMyErc1155TokensList,
   GetMyErc1155TokensListParams,
+  AuctionType,
+  SortBy,
 } from '../../src';
 import { account, chainId, erc721TokenAddress, erc721TokenId, erc1155TokenAddress, erc1155TokenId } from '../data-mock';
 
@@ -329,8 +331,8 @@ describe('test token queries', () => {
       owner,
       from: 0,
       size: pageSize,
-      sort: 'PriceAsc',
-      auctionType: 'All',
+      sort: SortBy.PriceAsc,
+      auctionType: AuctionType.All,
     };
 
     const mockResponse = {

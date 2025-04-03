@@ -167,6 +167,7 @@ export const GET_ALL_TOKENS = gql`
     $from: Int!
     $size: Int!
     $sort: ListingSortBy!
+    $tokenAddresses: [String!]!
   ) {
     tokens(
       owner: $owner
@@ -174,7 +175,7 @@ export const GET_ALL_TOKENS = gql`
       from: $from
       size: $size
       sort: $sort
-      tokenAddresses: []
+      tokenAddresses: $tokenAddresses
     ) {
       total
       data {

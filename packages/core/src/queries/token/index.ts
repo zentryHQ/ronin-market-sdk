@@ -140,6 +140,7 @@ export const getAllTokens = (params: GetAllTokensParams) => {
   const variables = {
     auctionType: AuctionType.All,
     sort: ListingSortBy.PriceAsc,
+    tokenAddresses: [],
     ...otherParams,
   };
   return graphQLRequest<GetAllTokensResponse>({

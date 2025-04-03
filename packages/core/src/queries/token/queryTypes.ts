@@ -172,6 +172,7 @@ export interface GetAllTokensParams {
   size: number;
   auctionType?: AuctionType; // default: AuctionType.All
   sort?: ListingSortBy; // default: ListingSortBy.PriceAsc
+  tokenAddresses?: string[]; // default: []
 }
 
 export interface GetAllTokens_Erc721 {
