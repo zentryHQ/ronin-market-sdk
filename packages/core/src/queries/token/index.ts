@@ -71,7 +71,7 @@ export const getErc721Token = (params: GetErc721TokenParams) => {
 
   const variables = { showMinPrice: false, ...otherParams };
   return graphQLRequest<GetErc721TokenResponse>({ query: GET_ERC721_TOKEN, variables, chainId }).then(
-    response => response?.erc721Token,
+    response => response?.erc721Token
   );
 };
 
@@ -112,7 +112,7 @@ export const getErc1155Token = (params: GetErc1155TokenParams) => {
 
   const variables = { showMinPrice: false, ...otherParams };
   return graphQLRequest<GetErc1155TokenResponse>({ query: GET_ERC1155_TOKEN, variables, chainId }).then(
-    response => response?.erc1155Token,
+    response => response?.erc1155Token
   );
 };
 
@@ -248,7 +248,6 @@ export const getTokenData = (params: GetTokenDataParams) => {
     return response?.tokenData || null;
   });
 };
-
 
 export const getErc1155TokenWithOrders = (params: GetErc1155TokenWithOrdersParams) => {
   const { chainId, ...otherParams } = params;

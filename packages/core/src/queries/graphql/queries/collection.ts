@@ -1,10 +1,7 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
-import {
-  CollectionFragment,
-  TokenMetaDataFragment,
-} from "../fragments/collection";
-import { PublicProfileBriefFragment } from "../fragments/profile";
+import { CollectionFragment, TokenMetaDataFragment } from '../fragments/collection';
+import { PublicProfileBriefFragment } from '../fragments/profile';
 
 export const GET_COLLECTIONS = gql`
   query Get721Collections($from: Int!, $size: Int!, $showMinPrice: Boolean!) {

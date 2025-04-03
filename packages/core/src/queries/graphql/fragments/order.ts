@@ -1,7 +1,7 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
-import { PublicProfileFragment } from "./profile";
-import { AssetFragment } from "./asset";
+import { PublicProfileFragment } from './profile';
+import { AssetFragment } from './asset';
 
 export const OrderFragment = gql`
   fragment Order on Order {

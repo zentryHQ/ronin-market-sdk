@@ -1,21 +1,21 @@
-import { gql } from "graphql-request";
+import { gql } from 'graphql-request';
 
-import { AssetFragment } from "../fragments/asset";
-import { OrderFragment, OrderInfoFragment } from "../fragments/order";
-import { PublicProfileBriefFragment } from "../fragments/profile";
+import { AssetFragment } from '../fragments/asset';
+import { OrderFragment, OrderInfoFragment } from '../fragments/order';
+import { PublicProfileBriefFragment } from '../fragments/profile';
 import {
   Erc1155TokenBriefFragment,
   Erc1155TokenFragment,
   Erc721TokenFragment,
   TransferRecordFragment,
-} from "../fragments/token";
+} from '../fragments/token';
 import {
   TokenDataFragment,
   CreatorInformationFragment,
   GameInfoFragment,
   GameCampaignFragment,
   FeaturedGameEventFragment,
-} from "../fragments/token";
+} from '../fragments/token';
 
 // Erc721
 export const GET_ERC721_TOKENS = gql`
@@ -55,11 +55,7 @@ export const GET_ERC721_TOKENS = gql`
 `;
 
 export const GET_ERC721_TOKEN = gql`
-  query GetERC721Token(
-    $tokenAddress: String!
-    $tokenId: String!
-    $showMinPrice: Boolean!
-  ) {
+  query GetERC721Token($tokenAddress: String!, $tokenId: String!, $showMinPrice: Boolean!) {
     erc721Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       ...Erc721Token
       minPrice @include(if: $showMinPrice)
@@ -69,12 +65,7 @@ export const GET_ERC721_TOKEN = gql`
 `;
 
 export const GET_ERC721_TRANSFER_HISTORY = gql`
-  query GetERC721TransferHistory(
-    $tokenAddress: String!
-    $tokenId: String!
-    $from: Int!
-    $size: Int!
-  ) {
+  query GetERC721TransferHistory($tokenAddress: String!, $tokenId: String!, $from: Int!, $size: Int!) {
     erc721Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       transferHistory(from: $from, size: $size) {
         total
@@ -123,11 +114,7 @@ export const GET_ERC1155_TOKENS = gql`
 `;
 
 export const GET_ERC1155_TOKEN = gql`
-  query GetERC1155Token(
-    $tokenAddress: String!
-    $tokenId: BigDecimal!
-    $showMinPrice: Boolean!
-  ) {
+  query GetERC1155Token($tokenAddress: String!, $tokenId: BigDecimal!, $showMinPrice: Boolean!) {
     erc1155Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       ...Erc1155Token
       minPrice @include(if: $showMinPrice)
@@ -137,12 +124,7 @@ export const GET_ERC1155_TOKEN = gql`
 `;
 
 export const GET_ERC1155_TRANSFER_HISTORY = gql`
-  query GetERC1155TransferHistory(
-    $tokenAddress: String!
-    $tokenId: BigDecimal!
-    $from: Int!
-    $size: Int!
-  ) {
+  query GetERC1155TransferHistory($tokenAddress: String!, $tokenId: BigDecimal!, $from: Int!, $size: Int!) {
     erc1155Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       transferHistory(from: $from, size: $size) {
         total
@@ -156,11 +138,7 @@ export const GET_ERC1155_TRANSFER_HISTORY = gql`
 `;
 
 export const GET_ERC1155_BALANCE = gql`
-  query GetErc1155Balance(
-    $tokenAddress: String!
-    $tokenId: BigDecimal!
-    $owner: String!
-  ) {
+  query GetErc1155Balance($tokenAddress: String!, $tokenId: BigDecimal!, $owner: String!) {
     erc1155Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
       balance(owner: $owner)
     }
@@ -208,13 +186,7 @@ export const GET_ALL_TOKENS = gql`
           erc1155CdnImage: cdnImage
           erc1155Video: video
           erc1155CollectionMetadata: collectionMetadata
-          erc1155Orders: orders(
-            maker: $owner
-            from: 0
-            size: 1
-            showInvalid: true
-            sort: PriceAsc
-          ) {
+          erc1155Orders: orders(maker: $owner, from: 0, size: 1, showInvalid: true, sort: PriceAsc) {
             ...Order
           }
           erc1155Balance: balance(owner: $owner)
@@ -257,22 +229,11 @@ export const GET_MY_ERC1155_TOKENS_LIST = gql`
         cdnImage
         video
         balance(owner: $owner)
-        orders(
-          maker: $owner
-          from: 0
-          size: 1
-          showInvalid: true
-          sort: PriceAsc
-        ) {
+        orders(maker: $owner, from: 0, size: 1, showInvalid: true, sort: PriceAsc) {
           ...OrderInfo
           __typename
         }
-        otherOrders: orders(
-          from: 0
-          size: 1
-          showInvalid: true
-          sort: PriceAsc
-        ) {
+        otherOrders: orders(from: 0, size: 1, showInvalid: true, sort: PriceAsc) {
           ...OrderInfo
           __typename
         }

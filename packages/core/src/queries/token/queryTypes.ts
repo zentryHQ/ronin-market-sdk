@@ -1,12 +1,7 @@
-import { ChainId } from "../../types";
-import { CollectionMetadata, Erc } from "../collection";
-import {
-  AuctionType,
-  ListingSortBy,
-  Order,
-  OrderQuantity,
-} from "../order/types";
-import { Addresses } from "../profile/types";
+import { ChainId } from '../../types';
+import { CollectionMetadata, Erc } from '../collection';
+import { AuctionType, ListingSortBy, Order, OrderQuantity } from '../order/types';
+import { Addresses } from '../profile/types';
 import {
   CommonTokenData,
   Erc721Token,
@@ -16,7 +11,7 @@ import {
   SearchCriteria,
   SortBy,
   TransferHistory,
-} from "./types";
+} from './types';
 
 // Get tokens
 export interface GetErc721TokensParams {

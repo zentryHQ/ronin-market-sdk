@@ -194,7 +194,7 @@ const data = await getErc1155Token(params);
 #### _Get erc1155 token with orders_
 
 ```javascript
-import { ChainId, getErc1155TokenWithOrders } from "@zentry/mavis-market-core";
+import { ChainId, getErc1155TokenWithOrders } from '@sky-mavis/mavis-market-core';
 
 const params = {
   chainId: ChainId.testnet,
@@ -213,7 +213,7 @@ import {
   getErc1155TokensList,
   AuctionType,
   SortBy,
-} from "@zentry/mavis-market-core";
+} from '@sky-mavis/mavis-market-core';
 
 const params = {
   chainId: ChainId.testnet,
@@ -496,7 +496,7 @@ const exchangeRate = await getExchangeRate(params);
 #### _Get collection analytics_
 
 ```javascript
-import { ChainId, getCollectionAnalytics } from "@zentry/mavis-market-core";
+import { ChainId, getCollectionAnalytics } from '@sky-mavis/mavis-market-core';
 
 const params = {
   chainId: ChainId.testnet,
@@ -916,7 +916,7 @@ import {
   getMyErc1155TokensList,
   AuctionType,
   SortBy,
-} from "@zentry/mavis-market-core";
+} from '@sky-mavis/mavis-market-core';
 
 const params = {
   chainId: ChainId.testnet,

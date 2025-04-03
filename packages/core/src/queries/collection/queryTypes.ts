@@ -46,7 +46,6 @@ export interface GetCollectionAnalyticsParams {
   tokenAddress: string;
 }
 
-
 export interface GetCollectionAnalyticsResponse {
   collectionAnalytics: CollectionAnalytic;
 }

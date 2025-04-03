@@ -1,5 +1,5 @@
-import { PublicProfile } from "../profile";
-import { AttributeType } from "../token";
+import { PublicProfile } from '../profile';
+import { AttributeType } from '../token';
 
 export enum Erc {
   Erc1155 = "Erc1155",
