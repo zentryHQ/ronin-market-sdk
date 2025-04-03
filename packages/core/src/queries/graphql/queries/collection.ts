@@ -1,6 +1,10 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
-import { CollectionFragment, TokenMetaDataFragment } from '../fragments/collection';
+import {
+  CollectionFragment,
+  TokenMetaDataFragment,
+} from "../fragments/collection";
+import { PublicProfileBriefFragment } from "../fragments/profile";
 
 export const GET_COLLECTIONS = gql`
   query Get721Collections($from: Int!, $size: Int!, $showMinPrice: Boolean!) {
@@ -42,4 +46,35 @@ export const GET_TOKEN_METADATA = gql`
     }
   }
   ${TokenMetaDataFragment}
+`;
+
+export const GET_COLLECTION_ANALYTICS = gql`
+  query GetCollectionAnalytics($tokenAddress: String!) {
+    collectionAnalytics(tokenAddress: $tokenAddress) {
+      ...CollectionAnalytic
+      __typename
+    }
+  }
+
+  fragment CollectionAnalytic on CollectionAnalytic {
+    changesPct
+    extraStats
+    floorDepth
+    mkpValueCharts
+    tokenAddress
+    totalSupply
+    topOwners {
+      ...TopOwner
+    }
+  }
+
+  fragment TopOwner on TopOwner {
+    owner
+    ownerProfile {
+      ...PublicProfileBrief
+    }
+    quantity
+  }
+
+  ${PublicProfileBriefFragment}
 `;
