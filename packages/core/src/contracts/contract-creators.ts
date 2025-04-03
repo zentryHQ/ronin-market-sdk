@@ -2,7 +2,7 @@ import { Contract, ContractInterface, ethers } from 'ethers';
 
 import { getConfig } from '../configs';
 import { wRonToken } from '../services/tokens/data';
-import { ChainId, Signer, WalletProvider } from '../types';
+import { ChainId, Signer, WalletClient, WalletProvider } from '../types';
 import ERC20_ABI from './abis/erc20.json';
 import ERC721_ABI from './abis/erc721.json';
 import ERC1155_ABI from './abis/erc1155.json';
@@ -14,11 +14,6 @@ import { Erc20, Erc721, Erc1155, MarketCommission, Wron } from './abis/types/v5'
 import WRON_ABI from './abis/wron.json';
 import { KatanaContract } from './KatanaContract';
 import { Erc1155MarketGatewayContract, MarketGatewayContract, MarketGatewayMultisendContract } from './market-gateway';
-
-export * from './abis/types/v5';
-export * from './KatanaContract';
-export * from './market-gateway';
-export * from './contract-creators';
 
 export const createContract = <Type>(
   contractAddress: string,
@@ -42,40 +37,35 @@ export const createErc20Contract = (contractAddress: string, provider?: WalletPr
 
 export const createKatanaContract = (chainId: ChainId, provider?: WalletProvider) => {
   const config = getConfig(chainId);
-  const katanaContractAddress = config.contractsAddress.katana;
-  return new KatanaContract(katanaContractAddress, KATANA_ABI, provider);
+  return createContract<KatanaContract>(config.contractsAddress.katana, KATANA_ABI, provider);
 };
 
 export const createMarketCommissionContract = (chainId: ChainId, provider?: WalletProvider) => {
   const config = getConfig(chainId);
-  const marketCommissionAddress = config.contractsAddress.marketCommission;
-  return createContract<MarketCommission>(marketCommissionAddress, MARKET_COMMISSION_ABI, provider);
+  return createContract<MarketCommission>(config.contractsAddress.marketCommission, MARKET_COMMISSION_ABI, provider);
 };
 
 export const createMarketGatewayContract = (chainId: ChainId, provider?: WalletProvider) => {
   const config = getConfig(chainId);
-  const marketGatewayAddress = config.contractsAddress.marketGateway;
-  return new MarketGatewayContract(marketGatewayAddress, MARKET_GATEWAY_ABI, provider);
+  return createContract<MarketGatewayContract>(config.contractsAddress.marketGateway, MARKET_GATEWAY_ABI, provider);
 };
 
 export const createErc1155MarketGatewayContract = (chainId: ChainId, provider?: WalletProvider) => {
   const config = getConfig(chainId);
-  const marketGatewayAddress = config.contractsAddress.marketGateway;
-  return new Erc1155MarketGatewayContract(marketGatewayAddress, MARKET_GATEWAY_ABI, provider);
+  return createContract<Erc1155MarketGatewayContract>(config.contractsAddress.marketGateway, MARKET_GATEWAY_ABI, provider);
 };
 
 export const createMarketGatewayMultiSendContract = (chainId: ChainId, provider?: WalletProvider) => {
   const config = getConfig(chainId);
-  const marketGatewayMultisendAddress = config.contractsAddress.marketGatewayMultisend;
-  return new MarketGatewayMultisendContract(marketGatewayMultisendAddress, MARKET_GATEWAY_MULTISEND_ABI, provider);
+  return createContract<MarketGatewayMultisendContract>(config.contractsAddress.marketGatewayMultisend, MARKET_GATEWAY_MULTISEND_ABI, provider);
 };
 
 export const createWRonContract = (chainId: ChainId, provider?: WalletProvider) => {
-  const wRonAddress = wRonToken[chainId].address;
-  return createContract<Wron>(wRonAddress, WRON_ABI, provider);
+  const config = getConfig(chainId);
+  return createContract<Wron>(wRonToken[chainId].address, WRON_ABI, provider);
 };
 
 export const createReadOnlyProvider = (chainId: ChainId) => {
   const config = getConfig(chainId);
-  return new ethers.providers.StaticJsonRpcProvider(config.rpcEndpoint, chainId);
-};
+  return new ethers.providers.JsonRpcProvider(config.rpcEndpoint);
+}; 
