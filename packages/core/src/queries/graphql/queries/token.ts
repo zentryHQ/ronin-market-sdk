@@ -8,6 +8,13 @@ import {
   Erc721TokenFragment,
   TransferRecordFragment,
 } from "../fragments/token";
+import {
+  TokenDataFragment,
+  CreatorInformationFragment,
+  GameInfoFragment,
+  GameCampaignFragment,
+  FeaturedGameEventFragment,
+} from "../fragments/token";
 
 // Erc721
 export const GET_ERC721_TOKENS = gql`
@@ -278,4 +285,17 @@ export const GET_MY_ERC1155_TOKENS_LIST = gql`
   ${OrderInfoFragment}
   ${AssetFragment}
   ${PublicProfileBriefFragment}
+`;
+
+export const GET_TOKEN_DATA = gql`
+  query GetTokenData($tokenAddress: String, $slug: String) {
+    tokenData(tokenAddress: $tokenAddress, slug: $slug) {
+      ...TokenData
+    }
+  }
+  ${TokenDataFragment}
+  ${CreatorInformationFragment}
+  ${GameInfoFragment}
+  ${GameCampaignFragment}
+  ${FeaturedGameEventFragment}
 `;

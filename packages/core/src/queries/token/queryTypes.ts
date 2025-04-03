@@ -283,3 +283,46 @@ export interface GetMyErc1155TokensListResponse {
     }>;
   };
 }
+
+export interface GetTokenDataParams {
+  chainId: number;
+  tokenAddress?: string;
+  slug?: string;
+}
+
+export interface GetTokenDataResponse {
+  tokenData: {
+    tokenAddress: string;
+    collectionMetadata: CollectionMetadata;
+    totalVolume: string;
+    totalOwners: number;
+    totalItems: number;
+    totalListing: number;
+    erc: string;
+    allowedPaymentTokens: string[];
+    creatorInformation?: {
+      address: string;
+      name: string;
+      description: string;
+      image: string;
+    };
+    gameInfo?: {
+      id: string;
+      name: string;
+      description: string;
+      image: string;
+    };
+    gameCampaign?: {
+      id: string;
+      name: string;
+      description: string;
+      image: string;
+    };
+    featuredGameEvent?: {
+      id: string;
+      name: string;
+      description: string;
+      image: string;
+    };
+  } | null;
+}

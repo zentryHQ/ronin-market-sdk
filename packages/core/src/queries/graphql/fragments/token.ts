@@ -79,3 +79,91 @@ export const Erc1155TokenFragment = gql`
   }
   ${TokenTraitFragment}
 `;
+
+export const TokenDataFragment = gql`
+  fragment TokenData on TokenData {
+    tokenAddress
+    slug
+    collectionMetadata
+    volumeAllTime
+    totalOwners
+    totalItems
+    totalListing
+    minPrice
+    erc
+    groupTraits
+    content
+    creatorId
+    badged
+    creatorInfo {
+      ...CreatorInformation
+    }
+    allowedPaymentTokens
+    games {
+      ...GameInfo
+    }
+    benefits
+    featuredCampaigns(size: 4) {
+      featuredEvents {
+        ...FeaturedGameEvent
+      }
+    }
+    tradableAfter
+  }
+`;
+
+export const CreatorInformationFragment = gql`
+  fragment CreatorInformation on CreatorInformation {
+    id
+    creatorName
+    verified
+    metadata
+  }
+`;
+
+export const GameInfoFragment = gql`
+  fragment GameInfo on GameInfo {
+    slug
+    name
+    consoleMetadata
+    gameId
+    creatorInfo {
+      creatorName
+      verified
+    }
+    gameCampaigns {
+      liveEvents {
+        ...GameCampaign
+      }
+      promotionalBanner {
+        ...GameCampaign
+      }
+      upcomingEvents {
+        ...GameCampaign
+      }
+    }
+  }
+`;
+
+export const GameCampaignFragment = gql`
+  fragment GameCampaign on GameCampaign {
+    id
+    name
+    startTime
+    endTime
+    metadata
+  }
+`;
+
+export const FeaturedGameEventFragment = gql`
+  fragment FeaturedGameEvent on FeaturedGameEvent {
+    gameInfo {
+      gameId
+      name
+      consoleMetadata
+    }
+    gameCampaign {
+      ...GameCampaign
+    }
+  }
+`;
