@@ -191,6 +191,20 @@ const params = {
 const data = await getErc1155Token(params);
 ```
 
+#### _Get erc1155 token with orders_
+
+```javascript
+import { ChainId, getErc1155TokenWithOrders } from "@zentry/mavis-market-core";
+
+const params = {
+  chainId: ChainId.testnet,
+  tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
+  tokenId: "5",
+};
+
+const data = await getErc1155TokenWithOrders(params);
+```
+
 #### _Get erc1155 token transfer history_
 
 ```javascript

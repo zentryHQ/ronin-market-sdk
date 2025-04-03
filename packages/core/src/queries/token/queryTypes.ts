@@ -326,3 +326,17 @@ export interface GetTokenDataResponse {
     };
   } | null;
 }
+
+export interface GetErc1155TokenWithOrdersParams {
+  chainId: number;
+  tokenAddress: string;
+  tokenId: string;
+}
+
+export interface GetErc1155TokenWithOrdersResponse {
+  erc1155Token: Erc1155Token;
+}
+
+
+
+

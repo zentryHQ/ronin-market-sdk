@@ -299,3 +299,62 @@ export const GET_TOKEN_DATA = gql`
   ${GameCampaignFragment}
   ${FeaturedGameEventFragment}
 `;
+
+export const GET_ERC1155_TOKEN_WITH_ORDERS = gql`
+  query GetERC1155Token($tokenAddress: String!, $tokenId: BigDecimal!) {
+    erc1155Token(tokenAddress: $tokenAddress, tokenId: $tokenId) {
+      tokenAddress
+      tokenId
+      slug
+      name
+      image
+      cdnImage
+      video
+      minPrice
+      totalItems
+      collectionMetadata
+      isLocked
+      badged
+      orders(from: 0, size: 1, showInvalid: false, sort: PriceAsc) {
+        id
+        maker
+        kind
+        assets {
+          erc
+          address
+          id
+          quantity
+        }
+        expiredAt
+        paymentToken
+        startedAt
+        basePrice
+        expectedState
+        nonce
+        marketFeePercentage
+        signature
+        hash
+        duration
+        timeLeft
+        currentPrice
+        suggestedPrice
+        makerProfile {
+          accountId
+          addresses {
+            ethereum
+            ronin
+          }
+          activated
+          name
+        }
+        orderStatus
+        orderQuantity {
+          orderId
+          quantity
+          remainingQuantity
+          availableQuantity
+        }
+      }
+    }
+  }
+`;
