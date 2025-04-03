@@ -16,6 +16,7 @@ export interface BulkSettleErc721OrderData {
   expectedState: BigNumberish;
   settlePrice: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   signature: BytesLike;
   order: Erc721Order;
   deadline?: BigNumberish;
@@ -27,6 +28,7 @@ export interface BulkSettleErc1155OrderData {
   expectedState: BigNumberish;
   settlePrice: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   signature: BytesLike;
   order: Erc1155Order;
   quantity: BigNumberish;
@@ -52,7 +54,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
     orderData: BulkSettleErc721OrderData,
     paymentToken: string,
   ) {
-    const { order, signature, referralAddr, expectedState, settlePrice, deadline, path } = orderData;
+    const { order, signature, referralAddr, expectedState, settlePrice, deadline, path, recipient } = orderData;
     const { provider, account } = wallet;
     const { paymentToken: listingToken } = order;
 
@@ -64,7 +66,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
       signature: signature,
       referralAddr: referralAddr,
       expectedState: expectedState,
-      recipient: account,
+      recipient: recipient ?? account, // if no recipient, use account as recipient
       refunder: account,
     };
 
@@ -99,7 +101,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
     orderData: BulkSettleErc1155OrderData,
     paymentToken: string,
   ) {
-    const { order, signature, referralAddr, expectedState, settlePrice, quantity, deadline, path } = orderData;
+    const { order, signature, referralAddr, expectedState, settlePrice, quantity, deadline, path, recipient } = orderData;
     const { provider, account } = wallet;
     const { paymentToken: listingToken } = order;
 
@@ -111,7 +113,7 @@ export class MarketGatewayMultisendContract extends BaseContract {
       signature: signature,
       referralAddr: referralAddr,
       expectedState: expectedState,
-      recipient: account,
+      recipient: recipient ?? account, // if no recipient, use account as recipient
       refunder: account,
     };
 

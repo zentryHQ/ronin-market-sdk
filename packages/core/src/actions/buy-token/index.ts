@@ -28,7 +28,7 @@ import { BuyErc721TokenParams, BuyErc1155TokenParams, BuyTokenDataParams, GetSwa
 export * from './types';
 
 export const buyErc721Token = async (params: BuyErc721TokenParams) => {
-  const { order, selectedTokenAddress, chainId, wallet, deadline, refAddress = ZERO_ADDRESS, options } = params;
+  const { order, selectedTokenAddress, chainId, wallet, deadline, refAddress = ZERO_ADDRESS, recipient, options } = params;
 
   if (!order) {
     throw new Error('Order not found');
@@ -74,17 +74,17 @@ export const buyErc721Token = async (params: BuyErc721TokenParams) => {
 
   // Settle order
   if (isBuyingWithListingToken) {
-    return settleErc721Order(chainId, wallet, order, settlePrice, refAddress, options);
+    return settleErc721Order(chainId, wallet, order, settlePrice, refAddress, recipient, options);
   }
 
   const swapConfig = getSwapConfig(chainId, listingToken);
   const tokenPaths = swapConfig[selectedTokenAddress]?.path;
 
   if (isBuyingWithRonToken) {
-    return swapRONAndSettleErc721Order(chainId, wallet, order, settlePrice, tokenPaths, deadline, refAddress, options);
+    return swapRONAndSettleErc721Order(chainId, wallet, order, settlePrice, tokenPaths, deadline, refAddress, recipient, options);
   }
 
-  return swapTokensAndSettleErc721Order(chainId, wallet, order, settlePrice, tokenPaths, deadline, refAddress, options);
+  return swapTokensAndSettleErc721Order(chainId, wallet, order, settlePrice, tokenPaths, deadline, refAddress, recipient, options);
 };
 
 export const buyErc1155Token = async (params: BuyErc1155TokenParams) => {
@@ -96,6 +96,7 @@ export const buyErc1155Token = async (params: BuyErc1155TokenParams) => {
     quantity,
     deadline,
     refAddress = ZERO_ADDRESS,
+    recipient,
     options,
   } = params;
 
@@ -146,7 +147,7 @@ export const buyErc1155Token = async (params: BuyErc1155TokenParams) => {
 
   // Settle order
   if (isBuyingWithListingToken) {
-    return settleErc1155Order(chainId, wallet, order, settlePrice, quantity, refAddress, options);
+    return settleErc1155Order(chainId, wallet, order, settlePrice, quantity, refAddress, recipient, options);
   }
 
   const swapConfig = getSwapConfig(chainId, listingToken);
@@ -162,6 +163,7 @@ export const buyErc1155Token = async (params: BuyErc1155TokenParams) => {
       quantity,
       deadline,
       refAddress,
+      recipient,
       options,
     );
   }
@@ -175,6 +177,7 @@ export const buyErc1155Token = async (params: BuyErc1155TokenParams) => {
     quantity,
     deadline,
     refAddress,
+    recipient,
     options,
   );
 };

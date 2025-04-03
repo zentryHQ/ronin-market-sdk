@@ -11,6 +11,7 @@ export interface SettleOrderContractParams {
   expectedState: BigNumberish;
   settlePrice: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   signature: BytesLike;
   order: Erc721Order;
   account: string;
@@ -22,6 +23,7 @@ export interface SwapSettleOrderContractParams {
   expectedState: BigNumberish;
   settlePrice: BigNumberish;
   referralAddr: string;
+  recipient?: string;
   deadline: BigNumberish;
   path: string[];
   signature: BytesLike;
@@ -73,10 +75,10 @@ export class MarketGatewayContract extends BaseContract {
   }
 
   async settleOrder(params: SettleOrderContractParams) {
-    const { order, signature, referralAddr, expectedState, account, settlePrice, chainId, options } = params;
+    const { order, signature, referralAddr, expectedState, account, settlePrice, chainId, options, recipient:recipientParam } = params;
     const { kind, maker, paymentToken } = order;
     const encodedOrder = this.encodeOrder(order);
-    const recipient = kind === OrderKind.Offer ? maker : account;
+    const recipient = kind === OrderKind.Offer ? maker : recipientParam ?? account;
     const orderInfo: SettleParameterStruct = {
       orderData: encodedOrder,
       signature: signature,
@@ -100,9 +102,9 @@ export class MarketGatewayContract extends BaseContract {
   }
 
   async swapTokensAndSettleOrder(params: SwapSettleOrderContractParams) {
-    const { order, signature, referralAddr, expectedState, settlePrice, deadline, path, account, options } = params;
+    const { order, signature, referralAddr, expectedState, settlePrice, deadline, path, account, options, recipient:recipientParam } = params;
     const encodedOrder = this.encodeOrder(order);
-    const recipient = order.kind === OrderKind.Offer ? order.maker : account;
+    const recipient = order.kind === OrderKind.Offer ? order.maker : recipientParam ?? account;
     const orderInfo: SettleParameterStruct = {
       orderData: encodedOrder,
       signature: signature,
@@ -118,9 +120,9 @@ export class MarketGatewayContract extends BaseContract {
   }
 
   async swapRONAndSettleOrder(params: SwapSettleOrderContractParams) {
-    const { order, signature, referralAddr, expectedState, deadline, path, account, options } = params;
+    const { order, signature, referralAddr, expectedState, deadline, path, account, options, recipient:recipientParam } = params;
     const encodedOrder = this.encodeOrder(order);
-    const recipient = order.kind === OrderKind.Offer ? order.maker : account;
+    const recipient = order.kind === OrderKind.Offer ? order.maker : recipientParam ?? account;
     const settleInfo: SettleParameterStruct = {
       orderData: encodedOrder,
       signature: signature,
