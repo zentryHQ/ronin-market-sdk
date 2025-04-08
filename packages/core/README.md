@@ -717,6 +717,75 @@ const bulkBuyErc1155TokenParams = {
 const tx = await bulkBuyToken(bulkBuyErc1155TokenParams);
 ```
 
+#### _Bulk buy ERC1155 tokens by criteria_
+
+```javascript
+import { parseEther } from 'ethers/lib/utils';
+import {
+  approveToken,
+  BulkBuyOrderData,
+  bulkBuyToken,
+  ChainId,
+  Erc,
+  getOrdersByCriteria,
+  GetOrdersByCriteriaParams,
+  getOrdersByQuantity,
+  getTokensNeedToApproveByOrders,
+  paymentTokens,
+} from '../src';
+
+const paymentTokenAddress = '0x0000000000000000000000000000000000000000';
+const chainId = ChainId.testnet;
+const wallet: any = {}; // signer wallet
+const deadline = Math.floor(Date.now() / 1000) + 300; // 300 seconds from now
+const availableOrders = await getOrdersByCriteria({
+  chainId: ChainId.testnet,
+  tokenAddress: '0x2f2c1d8fc5c242d6c9fc14b9e9997f55eff2d61a',
+  maxPrice: BigInt(parseUnits('10', 6).toString()), // 10 ION
+  criteria: [
+    {
+      name: 'Item ID',
+      values: ['656'],
+    },
+  ],
+  from: 0,
+  size: 10,
+});
+
+const quantity = 10;
+
+const selectedOrders: BulkBuyOrderData[] = getOrdersByQuantity(availableOrders, quantity);
+
+const tokensNeedToApproveByOrders = await getTokensNeedToApproveByOrders(
+  chainId,
+  wallet,
+  selectedOrders,
+  paymentTokenAddress
+);
+
+if (tokensNeedToApproveByOrders.length > 0) {
+  //approve any token
+  const approveTx = await approveToken({
+    address: tokensNeedToApproveByOrders[0].address,
+    chainId,
+    wallet,
+    tokenType: paymentTokens[chainId][tokensNeedToApproveByOrders[0].symbol],
+  });
+}
+
+const bulkBuyErc1155TokenParams = {
+  chainId,
+  wallet,
+  data: selectedOrders,
+  selectedTokenAddress: paymentTokenAddress,
+  deadline: deadline.toString(), // seconds,
+  tokenType: Erc.Erc1155,
+  requiredAllSuccess: false,
+};
+const tx = await bulkBuyToken(bulkBuyErc1155TokenParams);
+
+```
+
 #### _Create order_
 
 ```javascript

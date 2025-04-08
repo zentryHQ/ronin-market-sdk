@@ -1,5 +1,5 @@
 import { ChainId } from '../../types';
-import { Erc1155SortBy } from '../token';
+import { Erc1155SortBy, RangeSearchCriteria, SearchCriteria } from '../token';
 import { CollectibleFilter, InputOrder, ListingSortBy, Order } from './types';
 
 export interface Erc721TokenDataParam {
@@ -92,3 +92,13 @@ export interface RequestCreateOrderParams {
 export interface CreateOrderResponse {
   createOrder: Order;
 }
+
+export type GetOrdersByCriteriaParams = {
+  chainId: ChainId;
+  tokenAddress: string;
+  maxPrice?: bigint;
+  criteria?: SearchCriteria[];
+  rangeCriteria?: RangeSearchCriteria[];
+  from: number;
+  size: number;
+};

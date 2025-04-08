@@ -7,3 +7,4 @@ export * from './getOrderState';
 export * from './getOrdersTotalPrice';
 export * from './getSwapTokenData';
 export * from './settleOrder';
+export * from './getOrdersByCriteria';
