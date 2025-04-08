@@ -5,13 +5,13 @@
 With yarn
 
 ```
- yarn add @zentry/mavis-market-core
+ yarn add @zentry/mavis-market-sdk
 ```
 
 With npm
 
 ```
- npm install @zentry/mavis-market-core --save
+ npm install @zentry/mavis-market-sdk --save
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ With npm
 #### _Get all collections_
 
 ```javascript
-import { ChainId, getCollections } from "@zentry/mavis-market-core";
+import { ChainId, getCollections } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -35,7 +35,7 @@ const { erc721Collections, erc1155Collections } = await getCollections(params);
 #### _Get collection detail_
 
 ```javascript
-import { ChainId, getCollection } from "@zentry/mavis-market-core";
+import { ChainId, getCollection } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -48,7 +48,7 @@ const collection = await getCollection(params);
 #### _Get token metadata_
 
 ```javascript
-import { ChainId, getTokenMetadata } from "@zentry/mavis-market-core";
+import { ChainId, getTokenMetadata } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -67,7 +67,7 @@ import {
   AuctionType,
   ListingSortBy,
   getAllTokens,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -90,7 +90,7 @@ import {
   AuctionType,
   SortBy,
   getErc721Tokens,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -123,7 +123,7 @@ const { total, results } = await getErc721Tokens(params);
 #### _Get erc721 token detail_
 
 ```javascript
-import { ChainId, getErc721Token } from "@zentry/mavis-market-core";
+import { ChainId, getErc721Token } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -140,7 +140,7 @@ const data = await getErc721Token(params);
 import {
   ChainId,
   getErc721TokenTransferHistory,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -161,7 +161,7 @@ import {
   AuctionType,
   SortBy,
   getErc1155Tokens,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -181,7 +181,7 @@ const { total, results } = await getErc1155Tokens(params);
 #### _Get erc1155 token detail_
 
 ```javascript
-import { ChainId, getErc1155Token } from "@zentry/mavis-market-core";
+import { ChainId, getErc1155Token } from "@zentry/mavis-market-sdk";
 const params = {
   chainId: ChainId.testnet,
   tokenAddress: "0xb987afb62f67a317b5ddbc05c4ddba528a5dbd09",
@@ -245,7 +245,7 @@ const { total, results } = await getErc1155TokensList(params);
 import {
   ChainId,
   getErc1155TokenTransferHistory,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -261,7 +261,7 @@ const { total, results } = await getErc1155TokenTransferHistory(params);
 #### _Get erc1155 balance_
 
 ```javascript
-import { ChainId, getErc1155Balance } from "@zentry/mavis-market-core";
+import { ChainId, getErc1155Balance } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -276,7 +276,7 @@ const balance = await getErc1155Balance(params);
 #### _Get erc721 order_
 
 ```javascript
-import { ChainId, getErc721Order } from "@zentry/mavis-market-core";
+import { ChainId, getErc721Order } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -290,7 +290,7 @@ const order = await getErc721Order(params);
 #### _Get erc721 active orders of tokens_
 
 ```javascript
-import { ChainId, getActiveOrdersOfTokens } from "@zentry/mavis-market-core";
+import { ChainId, getActiveOrdersOfTokens } from "@zentry/mavis-market-sdk";
 
 const tokenIds = [
   {
@@ -315,7 +315,7 @@ import {
   ChainId,
   Erc1155SortBy,
   getErc1155Orders,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -334,7 +334,7 @@ const orders = await getErc1155Orders(params);
 #### _Get order by hash_
 
 ```javascript
-import { ChainId, getOrderByHash } from "@zentry/mavis-market-core";
+import { ChainId, getOrderByHash } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -352,7 +352,7 @@ import {
   ListingSortBy,
   Erc,
   getOrdersByAddress,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -373,7 +373,7 @@ const { total, quantity, data } = await getOrdersByAddress(params);
 #### _Get offers_
 
 ```javascript
-import { ChainId, getOffers } from "@zentry/mavis-market-core";
+import { ChainId, getOffers } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -389,7 +389,7 @@ const offers = await getOffers(params);
 #### _Get offer detail_
 
 ```javascript
-import { ChainId, getOffer } from "@zentry/mavis-market-core";
+import { ChainId, getOffer } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -407,7 +407,7 @@ import {
   getSentOffers,
   Erc,
   OfferSortBy,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -433,7 +433,7 @@ import {
   Erc,
   OfferSortBy,
   getReceivedOffers,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -454,7 +454,7 @@ const { total, data } = await getReceivedOffers(params);
 #### _Get offers amount_
 
 ```javascript
-import { ChainId, getOffersAmount } from "@zentry/mavis-market-core";
+import { ChainId, getOffersAmount } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -469,7 +469,7 @@ const { receivedOffersAmount, sentOffersAmount } = await getOffersAmount(
 #### _Get offer by address_
 
 ```javascript
-import { ChainId, getOfferByAddress } from "@zentry/mavis-market-core";
+import { ChainId, getOfferByAddress } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -484,7 +484,7 @@ const offer = await getOfferByAddress(params);
 #### _Get exchange rate_
 
 ```javascript
-import { ChainId, getExchangeRate } from "@zentry/mavis-market-core";
+import { ChainId, getExchangeRate } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -522,7 +522,7 @@ import {
   getTokensNeedToApprove,
   checkIsErc20Approved,
   buyToken,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -603,7 +603,7 @@ import {
   getErc1155Orders,
   paymentTokens,
   Token,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 import { getOrdersByQuantity } from "./src/services/order/getOrdersByQuantity";
 
@@ -669,7 +669,7 @@ import {
   getErc1155Orders,
   paymentTokens,
   Token,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 import { getOrdersByQuantity } from "./src/services/order/getOrdersByQuantity";
 
@@ -731,8 +731,9 @@ import {
   GetOrdersByCriteriaParams,
   getOrdersByQuantity,
   getTokensNeedToApproveByOrders,
+  ApproveTokenType,
   paymentTokens,
-} from '../src';
+} from '@zentry/mavis-market-sdk';
 
 const paymentTokenAddress = '0x0000000000000000000000000000000000000000';
 const chainId = ChainId.testnet;
@@ -769,7 +770,7 @@ if (tokensNeedToApproveByOrders.length > 0) {
     address: tokensNeedToApproveByOrders[0].address,
     chainId,
     wallet,
-    tokenType: paymentTokens[chainId][tokensNeedToApproveByOrders[0].symbol],
+    tokenType: ApproveTokenType.Erc20,
   });
 }
 
@@ -794,8 +795,8 @@ import {
   ApproveTokenType,
   checkIsErc721Approved,
   approveToken,
-} from "@zentry/mavis-market-core";
-import * as functions from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const tokenAddress = "0x3fe52e39c3241ee5440a57edbb553563356b770c";
@@ -836,8 +837,8 @@ const order = await createOrder(params);
 #### _Cancel order_
 
 ```javascript
-import { ChainId, cancelOrder } from "@zentry/mavis-market-core";
-import * as functions from "@zentry/mavis-market-core";
+import { ChainId, cancelOrder } from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
 const wallet = createWalletClient();
 const params = {
@@ -852,7 +853,7 @@ const tx = await cancelOrder(params);
 #### _Gift_
 
 ```javascript
-import { ChainId, giftToken } from "@zentry/mavis-market-core";
+import { ChainId, giftToken } from "@zentry/mavis-market-sdk";
 
 const wallet = createWalletClient();
 
@@ -869,7 +870,7 @@ const tx = await giftToken(params);
 #### _Wrap ron, unwrap ron_
 
 ```javascript
-import { ChainId, wrapRon, unwrapRon } from "@zentry/mavis-market-core";
+import { ChainId, wrapRon, unwrapRon } from "@zentry/mavis-market-sdk";
 
 // wrap RON
 const wallet = createWalletClient();
@@ -898,7 +899,7 @@ import {
   checkIsInsufficientOfferBalance,
   checkIsWRonTokenApproved,
   approveToken,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 const account = "0xce21e5ed74935379eda4d9120c3887423f960aac";
@@ -934,7 +935,7 @@ const offer = await functions.makeOffer(params);
 #### _Accept offer_
 
 ```javascript
-import { ChainId, acceptOffer } from "@zentry/mavis-market-core";
+import { ChainId, acceptOffer } from "@zentry/mavis-market-sdk";
 
 const wallet = createWalletClient();
 const params = {
@@ -948,8 +949,8 @@ const tx = await functions.acceptOffer(params);
 #### _Cancel offer_
 
 ```javascript
-import { ChainId, cancelOffer } from "@zentry/mavis-market-core";
-import * as functions from "@zentry/mavis-market-core";
+import { ChainId, cancelOffer } from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
 const cancelOffer = async () => {
   const wallet = createWalletClient();
@@ -967,7 +968,7 @@ const cancelOffer = async () => {
 #### _Refresh metadata_
 
 ```javascript
-import { ChainId, refreshMetadata } from "@zentry/mavis-market-core";
+import { ChainId, refreshMetadata } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -1005,7 +1006,7 @@ const { total, results } = await getMyErc1155TokensList(params);
 #### _Create wallet client_
 
 ```javascript
-import { ChainId } from "@zentry/mavis-market-core";
+import { ChainId } from "@zentry/mavis-market-sdk";
 
 const createWalletClient = () => {
   const web3Provider = new ethers.providers.Web3Provider(window.ronin.provider);
@@ -1027,7 +1028,7 @@ import {
   paymentTokens,
   Token,
   getRate,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const exchangeRate = await getExchangeRate();
 const ronSymbol = paymentTokens[chainId][Token.RON].symbol;
@@ -1038,7 +1039,7 @@ const rate = getRate(ronSymbol, exchangeRate);
 #### _Get config_
 
 ```javascript
-import { getConfig } from "@zentry/mavis-market-core";
+import { getConfig } from "@zentry/mavis-market-sdk";
 
 const configs = getConfig(ChainId.testnet);
 ```
@@ -1051,7 +1052,7 @@ import {
   paymentTokens,
   Token,
   getSwapConfig,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -1062,7 +1063,7 @@ const swapConfig = getSwapConfig(chainId, ronAddress);
 #### _Get payment tokens_
 
 ```javascript
-import { ChainId, getPaymentTokens } from "@zentry/mavis-market-core";
+import { ChainId, getPaymentTokens } from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 
@@ -1072,7 +1073,7 @@ const tokens = getPaymentTokens(chainId);
 #### _Get offer token_
 
 ```javascript
-import { ChainId, wRonToken } from "@zentry/mavis-market-core";
+import { ChainId, wRonToken } from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 const offerToken = wRonToken[chainId].address;
@@ -1086,7 +1087,7 @@ import {
   paymentTokens,
   Token,
   getSwapTokenData,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const wethAddress = paymentTokens[chainId][Token.WETH].address;
 const ronAddress = paymentTokens[chainId][Token.RON].address;
@@ -1111,7 +1112,7 @@ const {
 #### _Get orders by quantity_
 
 ```javascript
-import { getOrdersByQuantity } from "@zentry/mavis-market-core";
+import { getOrdersByQuantity } from "@zentry/mavis-market-sdk";
 
 const params = {
   chainId: ChainId.testnet,
@@ -1140,7 +1141,7 @@ import {
   getOrdersTotalPrice,
   paymentTokens,
   Token,
-} from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
 
 const chainId = ChainId.testnet;
 const wallet = createWalletClient();
@@ -1178,8 +1179,8 @@ import {
   Token,
   getExchangeRate,
   convertAmountToUsd,
-} from "@zentry/mavis-market-core";
-import * as functions from "@zentry/mavis-market-core";
+} from "@zentry/mavis-market-sdk";
+import * as functions from "@zentry/mavis-market-sdk";
 
 const amount = "1000000000000000000";
 const ronSymbol = paymentTokens[chainId][Token.RON].symbol;
