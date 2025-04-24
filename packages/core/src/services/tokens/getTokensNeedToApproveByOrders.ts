@@ -11,6 +11,7 @@ export const getTokensNeedToApproveByOrders = async (
   wallet: WalletClient,
   bulkBuyOrderData: BulkBuyOrderData[],
   inputPaymentToken: string,
+  spenderAddress?: string,
 ): Promise<TokenData[]> => {
   const { account } = wallet;
 
@@ -38,6 +39,7 @@ export const getTokensNeedToApproveByOrders = async (
         inputPaymentToken,
         paymentToken,
         totalPrice,
+        spenderAddress,
       );
 
       allTokensNeedToApprove = [...allTokensNeedToApprove, ...tokensNeedToApprove] as TokenData[];

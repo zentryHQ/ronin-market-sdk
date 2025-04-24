@@ -733,12 +733,15 @@ import {
   getTokensNeedToApproveByOrders,
   ApproveTokenType,
   paymentTokens,
+  getConfig
 } from '@zentry/mavis-market-sdk';
 
 const paymentTokenAddress = '0x0000000000000000000000000000000000000000';
 const chainId = ChainId.testnet;
+const config = getConfig(chainId);
 const wallet: any = {}; // signer wallet
 const deadline = Math.floor(Date.now() / 1000) + 300; // 300 seconds from now
+const spenderAddress = config.contractsAddress.marketGatewayMultisend
 const availableOrders = await getOrdersByCriteria({
   chainId: ChainId.testnet,
   tokenAddress: '0x2f2c1d8fc5c242d6c9fc14b9e9997f55eff2d61a',
@@ -761,7 +764,8 @@ const tokensNeedToApproveByOrders = await getTokensNeedToApproveByOrders(
   chainId,
   wallet,
   selectedOrders,
-  paymentTokenAddress
+  paymentTokenAddress,
+  spenderAddress,
 );
 
 if (tokensNeedToApproveByOrders.length > 0) {
@@ -771,6 +775,7 @@ if (tokensNeedToApproveByOrders.length > 0) {
     chainId,
     wallet,
     tokenType: ApproveTokenType.Erc20,
+    spenderAddress,
   });
 }
 

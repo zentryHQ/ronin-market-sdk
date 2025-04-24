@@ -10,9 +10,10 @@ export const getTokensNeedToApprove = async (
   inputTokenAddress: string,
   outputTokenAddress: string,
   amount: string,
+  spenderAddress?: string,
 ) => {
   if (inputTokenAddress.toLowerCase() === outputTokenAddress.toLowerCase()) {
-    const isAllowed = await checkIsErc20Approved(chainId, account, inputTokenAddress, amount);
+    const isAllowed = await checkIsErc20Approved(chainId, account, inputTokenAddress, amount, spenderAddress);
     const paymentToken = getPaymentToken(chainId, inputTokenAddress);
     return isAllowed ? [] : [paymentToken];
   }
@@ -21,7 +22,7 @@ export const getTokensNeedToApprove = async (
   const tokens = swapConfig[inputTokenAddress]?.tokens || [];
 
   const tokensNeedToApprove = await tokens.reduce(async (results, currentToken) => {
-    const isAllowed = await checkIsErc20Approved(chainId, account, currentToken.address, amount);
+    const isAllowed = await checkIsErc20Approved(chainId, account, currentToken.address, amount, spenderAddress);
     const tokensData = await results;
     if (!isAllowed) {
       return [...tokensData, currentToken];

@@ -26,9 +26,9 @@ export const checkIsErc1155Approved = (chainId: ChainId, account: string, addres
   return erc1155Contract.connect(readProvider).isApprovedForAll(account, marketGatewayContractAddress);
 };
 
-export const checkIsErc20Approved = async (chainId: ChainId, account: string, address: string, amount: string) => {
+export const checkIsErc20Approved = async (chainId: ChainId, account: string, address: string, amount: string, spenderAddress?: string) => {
   const config = getConfig(chainId);
-  const marketGatewayContractAddress = config.contractsAddress.marketGateway;
+  const spender = spenderAddress || config.contractsAddress.marketGateway;
   const tokens = getPaymentTokens(chainId);
   const isRon = tokens[Token.RON].address.toLowerCase() === address.toLowerCase();
 
@@ -38,7 +38,7 @@ export const checkIsErc20Approved = async (chainId: ChainId, account: string, ad
 
   const erc20Contract = createErc20Contract(address);
   const readProvider = createReadOnlyProvider(chainId);
-  const response = await erc20Contract.connect(readProvider).allowance(account, marketGatewayContractAddress);
+  const response = await erc20Contract.connect(readProvider).allowance(account, spender);
 
   return response.gte(amount);
 };
