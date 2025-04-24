@@ -21,16 +21,14 @@ export const graphQLRequest = async <T>(params: GraphQLRequestParams) => {
   let { headers } = params;
   // if chainId is mainnet and marketplaceApiKey is set, use the mainnetGraphQLAPIGatewayEndpoint
   if (chainId === ChainId.mainnet && marketplaceApiKey) {
-    if (headers) {
-      if (!headers) {
-        headers = {
-          "x-api-key": marketplaceApiKey,
-        };
-      } else if (Array.isArray(headers)) {
-        headers.push(["x-api-key", marketplaceApiKey]);
-      } else {
-        headers["x-api-key"] = marketplaceApiKey;
-      }
+    if (!headers) {
+      headers = {
+        "x-api-key": marketplaceApiKey,
+      };
+    } else if (Array.isArray(headers)) {
+      headers.push(["x-api-key", marketplaceApiKey]);
+    } else {
+      headers["x-api-key"] = marketplaceApiKey;
     }
     return request<T>(
       mainnetGraphQLAPIGatewayEndpoint,
