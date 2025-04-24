@@ -16,6 +16,11 @@ With npm
 
 ## Usage
 
+### Environment Variables
+
+The SDK supports using the API Gateway endpoint for mainnet by setting the `MARKETPLACE_API_KEY` environment variable. When this variable is set, requests to mainnet will automatically use the API Gateway endpoint instead of the default GraphQL endpoint.
+
+
 ### Fetch data
 
 #### _Get all collections_
