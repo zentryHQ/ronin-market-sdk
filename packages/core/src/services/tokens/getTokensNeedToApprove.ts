@@ -1,4 +1,3 @@
-import { MarketType } from '../../configs';
 import { ChainId } from '../../types';
 import { checkIsErc20Approved } from './checkIsTokenApproved';
 import { getSwapConfig } from './configs';
@@ -11,10 +10,9 @@ export const getTokensNeedToApprove = async (
   inputTokenAddress: string,
   outputTokenAddress: string,
   amount: string,
-  market: MarketType = 'marketGateway',
 ) => {
   if (inputTokenAddress.toLowerCase() === outputTokenAddress.toLowerCase()) {
-    const isAllowed = await checkIsErc20Approved(chainId, account, inputTokenAddress, amount, market);
+    const isAllowed = await checkIsErc20Approved(chainId, account, inputTokenAddress, amount);
     const paymentToken = getPaymentToken(chainId, inputTokenAddress);
     return isAllowed ? [] : [paymentToken];
   }
@@ -23,7 +21,7 @@ export const getTokensNeedToApprove = async (
   const tokens = swapConfig[inputTokenAddress]?.tokens || [];
 
   const tokensNeedToApprove = await tokens.reduce(async (results, currentToken) => {
-    const isAllowed = await checkIsErc20Approved(chainId, account, currentToken.address, amount, market);
+    const isAllowed = await checkIsErc20Approved(chainId, account, currentToken.address, amount);
     const tokensData = await results;
     if (!isAllowed) {
       return [...tokensData, currentToken];

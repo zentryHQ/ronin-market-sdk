@@ -17,8 +17,6 @@ export interface Config {
   rnsAddress: string;
 }
 
-export type MarketType = keyof Config['contractsAddress'];
-
 export const mainnetConfig: Config = {
   rpcEndpoint: 'https://api.roninchain.com/rpc',
   chainId: 2020,
