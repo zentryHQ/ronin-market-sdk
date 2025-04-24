@@ -231,21 +231,17 @@ export const GET_MY_ERC1155_TOKENS_LIST = gql`
         balance(owner: $owner)
         orders(maker: $owner, from: 0, size: 1, showInvalid: true, sort: PriceAsc) {
           ...OrderInfo
-          __typename
         }
         otherOrders: orders(from: 0, size: 1, showInvalid: true, sort: PriceAsc) {
           ...OrderInfo
-          __typename
         }
         isLocked
         collectionMetadata
-        __typename
       }
-      __typename
     }
   }
   ${OrderInfoFragment}
-  ${AssetFragment}
+  ${AssetInfoFragment}
   ${PublicProfileBriefFragment}
 `;
 
