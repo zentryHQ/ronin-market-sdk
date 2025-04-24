@@ -7,5 +7,5 @@ export const getPaymentTokens = (chainId: ChainId) => {
 
 export const getPaymentToken = (chainId: ChainId, tokenAddress: string) => {
   const tokens = getPaymentTokens(chainId);
-  return Object.entries(tokens).find(([, value]) => value.address === tokenAddress)?.[1];
+  return Object.entries(tokens).find(([, value]) => value.address.toLowerCase() === tokenAddress.toLowerCase())?.[1];
 };
