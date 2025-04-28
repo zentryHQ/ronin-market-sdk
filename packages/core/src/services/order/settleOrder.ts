@@ -43,6 +43,7 @@ export const settleErc721Order = (
   const erc721Order = generateErc721Order(order);
 
   return marketGatewayContract.settleOrder({
+    
     expectedState,
     settlePrice,
     account,
@@ -141,6 +142,7 @@ export const settleErc1155Order = (
     signature,
     chainId,
     referralAddr,
+    recipient,
     quantity,
     order: erc1155Order,
     options,
