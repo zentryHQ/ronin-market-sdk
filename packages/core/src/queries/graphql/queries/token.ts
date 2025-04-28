@@ -7,6 +7,7 @@ import {
   CreatorInformationFragment,
   Erc721TokenFragment,
   Erc1155TokenBriefFragment,
+  Erc1155TokenBriefWithTraitsFragment,
   Erc1155TokenFragment,
   FeaturedGameEventFragment,
   GameCampaignFragment,
@@ -351,6 +352,46 @@ export const GET_ERC1155_TOKENS_LIST = gql`
   }
 
   ${Erc1155TokenBriefFragment}
+  ${OrderInfoFragment}
+  ${AssetInfoFragment}
+  ${PublicProfileBriefFragment}
+`;
+
+export const GET_ERC1155_TOKENS_LIST_WITH_TRAITS = gql`
+  query GetERC1155TokensListWithTraits(
+    $tokenAddress: String
+    $slug: String
+    $criteria: [SearchCriteria!]
+    $from: Int!
+    $size: Int!
+    $sort: SortBy
+    $auctionType: AuctionType
+    $name: String
+    $rangeCriteria: [RangeSearchCriteria!]
+    $owner: String
+  ) {
+    erc1155Tokens(
+      tokenAddress: $tokenAddress
+      slug: $slug
+      criteria: $criteria
+      from: $from
+      size: $size
+      sort: $sort
+      auctionType: $auctionType
+      name: $name
+      rangeCriteria: $rangeCriteria
+      owner: $owner
+    ) {
+      total
+      results {
+        ...Erc1155TokenBrief
+        __typename
+      }
+      __typename
+    }
+  }
+
+  ${Erc1155TokenBriefWithTraitsFragment}
   ${OrderInfoFragment}
   ${AssetInfoFragment}
   ${PublicProfileBriefFragment}

@@ -11,6 +11,7 @@ import {
   GET_ERC1155_TOKEN_WITH_ORDERS,
   GET_ERC1155_TOKENS,
   GET_ERC1155_TOKENS_LIST,
+  GET_ERC1155_TOKENS_LIST_WITH_TRAITS,
   GET_ERC1155_TRANSFER_HISTORY,
   GET_MY_ERC1155_TOKENS_LIST,
   GET_TOKEN_DATA,
@@ -266,6 +267,23 @@ export const getErc1155TokensList = (params: GetErc1155TokensListParams) => {
 
   return graphQLRequest<GetErc1155TokensListResponse>({
     query: GET_ERC1155_TOKENS_LIST,
+    variables: { ...otherParams },
+    chainId,
+  }).then(response => {
+    const erc1155Tokens = response?.erc1155Tokens || {};
+    const { total, results } = erc1155Tokens;
+    return {
+      total: total || 0,
+      results: results || [],
+    };
+  });
+};
+
+export const getErc1155TokensListWithTraits = (params: GetErc1155TokensListParams) => {
+  const { chainId, ...otherParams } = params;
+
+  return graphQLRequest<GetErc1155TokensListResponse>({
+    query: GET_ERC1155_TOKENS_LIST_WITH_TRAITS,
     variables: { ...otherParams },
     chainId,
   }).then(response => {
