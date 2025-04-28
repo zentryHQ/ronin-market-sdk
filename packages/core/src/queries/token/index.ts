@@ -8,12 +8,13 @@ import {
   GET_ERC721_TRANSFER_HISTORY,
   GET_ERC1155_BALANCE,
   GET_ERC1155_TOKEN,
+  GET_ERC1155_TOKEN_WITH_ORDERS,
   GET_ERC1155_TOKENS,
+  GET_ERC1155_TOKENS_LIST,
+  GET_ERC1155_TOKENS_LIST_WITH_TRAITS,
   GET_ERC1155_TRANSFER_HISTORY,
   GET_MY_ERC1155_TOKENS_LIST,
   GET_TOKEN_DATA,
-  GET_ERC1155_TOKEN_WITH_ORDERS,
-  GET_ERC1155_TOKENS_LIST,
 } from '../graphql/queries/token';
 import { AuctionType, ListingSortBy } from '../order/types';
 import {
@@ -31,20 +32,20 @@ import {
   GetErc1155BalanceResponse,
   GetErc1155TokenParams,
   GetErc1155TokenResponse,
+  GetErc1155TokensListParams,
+  GetErc1155TokensListResponse,
   GetErc1155TokensParams,
   GetErc1155TokensResponse,
   GetErc1155TokenTransferHistoryParams,
   GetErc1155TokenTransferHistoryResponse,
-  RefreshMetadataParams,
-  RefreshMetadataResponse,
+  GetErc1155TokenWithOrdersParams,
+  GetErc1155TokenWithOrdersResponse,
   GetMyErc1155TokensListParams,
   GetMyErc1155TokensListResponse,
   GetTokenDataParams,
   GetTokenDataResponse,
-  GetErc1155TokenWithOrdersParams,
-  GetErc1155TokenWithOrdersResponse,
-  GetErc1155TokensListResponse,
-  GetErc1155TokensListParams,
+  RefreshMetadataParams,
+  RefreshMetadataResponse,
 } from './queryTypes';
 import { CommonTokenData } from './types';
 
@@ -71,7 +72,7 @@ export const getErc721Token = (params: GetErc721TokenParams) => {
 
   const variables = { showMinPrice: false, ...otherParams };
   return graphQLRequest<GetErc721TokenResponse>({ query: GET_ERC721_TOKEN, variables, chainId }).then(
-    response => response?.erc721Token
+    response => response?.erc721Token,
   );
 };
 
@@ -112,7 +113,7 @@ export const getErc1155Token = (params: GetErc1155TokenParams) => {
 
   const variables = { showMinPrice: false, ...otherParams };
   return graphQLRequest<GetErc1155TokenResponse>({ query: GET_ERC1155_TOKEN, variables, chainId }).then(
-    response => response?.erc1155Token
+    response => response?.erc1155Token,
   );
 };
 
@@ -266,6 +267,23 @@ export const getErc1155TokensList = (params: GetErc1155TokensListParams) => {
 
   return graphQLRequest<GetErc1155TokensListResponse>({
     query: GET_ERC1155_TOKENS_LIST,
+    variables: { ...otherParams },
+    chainId,
+  }).then(response => {
+    const erc1155Tokens = response?.erc1155Tokens || {};
+    const { total, results } = erc1155Tokens;
+    return {
+      total: total || 0,
+      results: results || [],
+    };
+  });
+};
+
+export const getErc1155TokensListWithTraits = (params: GetErc1155TokensListParams) => {
+  const { chainId, ...otherParams } = params;
+
+  return graphQLRequest<GetErc1155TokensListResponse>({
+    query: GET_ERC1155_TOKENS_LIST_WITH_TRAITS,
     variables: { ...otherParams },
     chainId,
   }).then(response => {

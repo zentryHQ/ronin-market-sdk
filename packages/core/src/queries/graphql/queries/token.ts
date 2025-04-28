@@ -1,20 +1,20 @@
 import { gql } from 'graphql-request';
 
-import { AssetFragment, AssetInfoFragment } from '../fragments/asset';
+import { AssetInfoFragment } from '../fragments/asset';
 import { OrderFragment, OrderInfoFragment } from '../fragments/order';
 import { PublicProfileBriefFragment } from '../fragments/profile';
 import {
-  Erc1155TokenBriefFragment,
-  Erc1155TokenFragment,
-  Erc721TokenFragment,
-  TransferRecordFragment,
-} from '../fragments/token';
-import {
-  TokenDataFragment,
   CreatorInformationFragment,
-  GameInfoFragment,
-  GameCampaignFragment,
+  Erc721TokenFragment,
+  Erc1155TokenBriefFragment,
+  Erc1155TokenBriefWithTraitsFragment,
+  Erc1155TokenFragment,
   FeaturedGameEventFragment,
+  GameCampaignFragment,
+  GameInfoFragment,
+  TokenDataFragment,
+  TokenTraitFragment,
+  TransferRecordFragment,
 } from '../fragments/token';
 
 // Erc721
@@ -355,4 +355,45 @@ export const GET_ERC1155_TOKENS_LIST = gql`
   ${OrderInfoFragment}
   ${AssetInfoFragment}
   ${PublicProfileBriefFragment}
+`;
+
+export const GET_ERC1155_TOKENS_LIST_WITH_TRAITS = gql`
+  query GetERC1155TokensListWithTraits(
+    $tokenAddress: String
+    $slug: String
+    $criteria: [SearchCriteria!]
+    $from: Int!
+    $size: Int!
+    $sort: SortBy
+    $auctionType: AuctionType
+    $name: String
+    $rangeCriteria: [RangeSearchCriteria!]
+    $owner: String
+  ) {
+    erc1155Tokens(
+      tokenAddress: $tokenAddress
+      slug: $slug
+      criteria: $criteria
+      from: $from
+      size: $size
+      sort: $sort
+      auctionType: $auctionType
+      name: $name
+      rangeCriteria: $rangeCriteria
+      owner: $owner
+    ) {
+      total
+      results {
+        ...Erc1155TokenBrief
+        __typename
+      }
+      __typename
+    }
+  }
+
+  ${Erc1155TokenBriefWithTraitsFragment}
+  ${OrderInfoFragment}
+  ${AssetInfoFragment}
+  ${PublicProfileBriefFragment}
+  ${TokenTraitFragment}
 `;
