@@ -1,20 +1,19 @@
 import { gql } from 'graphql-request';
 
-import { AssetFragment, AssetInfoFragment } from '../fragments/asset';
+import { AssetInfoFragment } from '../fragments/asset';
 import { OrderFragment, OrderInfoFragment } from '../fragments/order';
 import { PublicProfileBriefFragment } from '../fragments/profile';
 import {
+  CreatorInformationFragment,
+  Erc721TokenFragment,
   Erc1155TokenBriefFragment,
   Erc1155TokenFragment,
-  Erc721TokenFragment,
-  TransferRecordFragment,
-} from '../fragments/token';
-import {
-  TokenDataFragment,
-  CreatorInformationFragment,
-  GameInfoFragment,
-  GameCampaignFragment,
   FeaturedGameEventFragment,
+  GameCampaignFragment,
+  GameInfoFragment,
+  TokenDataFragment,
+  TokenTraitFragment,
+  TransferRecordFragment,
 } from '../fragments/token';
 
 // Erc721
@@ -355,4 +354,5 @@ export const GET_ERC1155_TOKENS_LIST = gql`
   ${OrderInfoFragment}
   ${AssetInfoFragment}
   ${PublicProfileBriefFragment}
+  ${TokenTraitFragment}
 `;

@@ -184,6 +184,8 @@ export const Erc1155TokenBriefFragment = gql`
     orders(from: 0, size: 1, showInvalid: false, sort: PriceAsc) {
       ...OrderInfo
     }
+    traitDistribution {
+      ...TokenTrait
+    }
   }
 `;
-
