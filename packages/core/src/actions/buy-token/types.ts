@@ -11,6 +11,7 @@ export interface BuyTokenDataParams {
   quantity?: number;
   deadline: string;
   refAddress?: string;
+  recipient?: string;
   options?: ethers.Overrides;
 }
 
