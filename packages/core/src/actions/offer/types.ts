@@ -1,7 +1,7 @@
-import { ethers } from 'ethers';
+import { ethers } from "ethers";
 
-import { ChainId, WalletClient } from '../../types';
-import { CancelOrderParams } from '../order';
+import { ChainId, WalletClient } from "../../types";
+import { CancelOrderParams } from "../order";
 
 export interface MakeOfferParams {
   chainId: ChainId;
@@ -19,5 +19,6 @@ export interface AcceptOfferParams {
   wallet: WalletClient;
   hash: string;
   refAddress?: string;
+  recipient?: string;
   options?: ethers.Overrides;
 }
