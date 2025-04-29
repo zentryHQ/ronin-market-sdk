@@ -175,6 +175,7 @@ export const Erc1155TokenBriefFragment = gql`
     name
     image
     cdnImage
+    attributes
     video
     minPrice
     totalItems
@@ -194,6 +195,7 @@ export const Erc1155TokenBriefWithTraitsFragment = gql`
     name
     image
     cdnImage
+    attributes
     video
     minPrice
     totalItems
