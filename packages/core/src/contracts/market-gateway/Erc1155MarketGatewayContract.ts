@@ -167,8 +167,4 @@ export class Erc1155MarketGatewayContract extends MarketGatewayContract {
   }
 }
 
-export const createErc1155MarketGatewayContract = (chainId: ChainId, provider?: WalletProvider) => {
-  const config = getConfig(chainId);
-  const marketGatewayAddress = config.contractsAddress.marketGateway;
-  return new Erc1155MarketGatewayContract(marketGatewayAddress, MARKET_GATEWAY_ABI, provider);
-};
+

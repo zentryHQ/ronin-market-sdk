@@ -14,4 +14,4 @@ export const createErc1155MarketGatewayContract = (chainId: ChainId, provider?: 
   const config = getConfig(chainId);
   const marketGatewayAddress = config.contractsAddress.marketGateway;
   return new Erc1155MarketGatewayContract(marketGatewayAddress, MARKET_GATEWAY_ABI, provider);
-}; 
+};

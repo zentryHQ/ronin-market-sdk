@@ -152,8 +152,4 @@ export class MarketGatewayContract extends BaseContract {
   }
 }
 
-export const createMarketGatewayContract = (chainId: ChainId, provider?: WalletProvider) => {
-  const config = getConfig(chainId);
-  const marketGatewayAddress = config.contractsAddress.marketGateway;
-  return new MarketGatewayContract(marketGatewayAddress, MARKET_GATEWAY_ABI, provider);
-};
+
