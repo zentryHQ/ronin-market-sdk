@@ -4,11 +4,14 @@ import { ZERO_ADDRESS } from '../../common/constants';
 import { getConfig } from '../../configs';
 import { Token } from '../../services/tokens/data';
 import { getPaymentTokens } from '../../services/tokens/getPaymentTokens';
-import { ChainId, Erc721Order, Erc1155Order, WalletClient } from '../../types';
-import { createErc1155MarketGatewayContract, createMarketGatewayContract } from './factory';
+import { ChainId, Erc1155Order, Erc721Order, WalletClient } from '../../types';
 import { InteractWithParamsStruct } from '../abis/types/v5/MarketGatewayMultisend';
 import { SettleParameterStruct } from '../abis/types/v5/MavisExchange';
-import { Erc1155MarketGatewayContract, SettleOrderData } from './Erc1155MarketGatewayContract';
+import {
+  Erc1155MarketGatewayContract,
+  SettleOrderData
+} from './Erc1155MarketGatewayContract';
+import { createErc1155MarketGatewayContract, createMarketGatewayContract } from './factory';
 import { MarketGatewayContract, SettleOrderContractParams } from './MarketGatewayContract';
 
 export interface BulkSettleErc721OrderData {

@@ -6,7 +6,8 @@ import {
   createReadOnlyProvider,
   createWRonContract,
 } from '../../contracts';
-import { ChainId } from '../../types';
+import { ChainId, SpenderContractType } from '../../types';
+import { getSpenderContractAddress } from '../../utils';
 import { Token } from './data';
 import { getPaymentTokens } from './getPaymentTokens';
 

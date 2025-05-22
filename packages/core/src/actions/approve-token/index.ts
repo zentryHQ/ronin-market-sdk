@@ -2,6 +2,7 @@ import { BigNumber } from 'ethers';
 
 import { getConfig } from '../../configs';
 import { createErc20Contract, createErc721Contract, createErc1155Contract, createWRonContract } from '../../contracts';
+import { getSpenderContractAddress } from '../../utils';
 import {
   ApproveErc20TokenParams,
   ApproveErc721TokenParams,

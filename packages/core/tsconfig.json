@@ -20,7 +20,6 @@
     "jsx": "react",
     "sourceMap": false,
     "declarationDir": "dist/types",
-    //    "rootDir": "src",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "importHelpers": true,

@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 
-import { ChainId, WalletClient } from '../../types';
+import { ChainId, SpenderContractType, WalletClient } from '../../types';
 
 export enum ApproveTokenType {
   Erc721 = 'Erc721',

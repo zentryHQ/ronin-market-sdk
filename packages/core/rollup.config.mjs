@@ -28,12 +28,6 @@ const config = defineConfig({
     },
   ],
   external: ['ethers', 'ethers/lib/utils', 'graphql', 'graphql-request', 'typechain', 'lodash'],
-  context: 'window',
-  treeshake: {
-    moduleSideEffects: false,
-    propertyReadSideEffects: false,
-    tryCatchDeoptimization: false,
-  },
   plugins: [
     json(),
     resolve({
